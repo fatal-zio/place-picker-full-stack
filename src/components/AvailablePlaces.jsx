@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import Places from "./Places.jsx";
-import CustomError from "./CustomError.jsx";
+import { useState, useEffect } from 'react';
+import Places from './Places.jsx';
+import CustomError from './CustomError.jsx';
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [isFetching, setIsFetching] = useState(false);
@@ -12,15 +12,15 @@ export default function AvailablePlaces({ onSelectPlace }) {
       setIsFetching(true);
 
       try {
-        const response = await fetch("http://localhost:3000/places");
+        const response = await fetch('http://localhost:3000/dinky');
         const resData = await response.json();
 
         if (!response.ok) {
-          throw new Error("Failed to fetch places");
+          throw new Error('Failed to fetch places');
         }
         setAvailablePlaces(resData.places);
       } catch (error) {
-        setError(error);
+        setError({ message: error.message || 'Could not fetch places.' });
       }
 
       setIsFetching(false);
